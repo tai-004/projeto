@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+{% load bootstrap %}
+
+{% block TCCs %}
+{% if request.user.is_authenticated %}
+{% if perms.file_upload.editar %}
+
+<div class="container grid px-10 mx-auto ">
+  <div class="col-4">
+    <form action="/file/editar/{{ file.id }}/" method="post" enctype="multipart/form-data">
+      <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        Editar
+      </h4>
+      <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <label class="block text-sm">
+          <span class="text-gray-700 dark:text-gray-400">
+
+          </span>
+          <div class="text-xs font-semibold tracking-wide text-left text-gray-500">
+            {% csrf_token %}
+
+            {{form|bootstrap}}
+
+            <br><br><br>
+
+
+            <input
+              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+              placeholder="Jane Doe" type="submit" value="salvar" />
+          </div>
+        </label>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+  {% endif %}
+  {% endblock %}

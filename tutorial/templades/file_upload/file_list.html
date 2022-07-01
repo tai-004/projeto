@@ -1,0 +1,106 @@
+{% extends "_base.html" %}
+
+{% block TCCs %}
+
+<!--botão de criar postagem-->
+{% if request.user.is_authenticated %}
+{% if user == file_upload.criado_por or perms.file_upload.criar %}
+<a
+class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+href="/file/upload2/"
+>
+<div class="flex items-center">
+
+  <span>Criar postagem</span>
+</div>
+</a>
+<!---->
+{% endif %}
+{% endif %}
+{% if files %}
+
+<div class="w-full overflow-hidden rounded-lg shadow-xs">
+  <div class="w-full overflow-x-auto">
+    <table class="w-full whitespace-no-wrap">
+      <thead>
+        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+          <th class="px-4 py-3">Titulo</th>
+          <th class="px-4 py-3">Baixar</th>
+          <th class="px-4 py-3">Detalhar</th>
+          {% if perms.file_upload.editar %}
+          <th  class="px-4 py-3">Editar</th>
+          {% endif %}
+         
+          {% if perms.file_upload.excluir %}
+          <th  class="px-4 py-3">Excluir</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+        {% for file in files %}
+        <tr class="text-gray-700 dark:text-gray-400">
+          <td class="px-4 py-3">
+            <div class="flex items-center text-sm">
+              <!-- Avatar with inset shadow -->
+              
+              <div>
+                <p class="font-semibold">{{file.criado_por.username}}</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400">
+                  {{file.titulo}}
+                </p>
+              </div>
+            </div>
+          </td>
+          <td class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800  text-purple-600 px-4 py-3 text-sm" scope="col" >
+            <a href="/file/download{{ file.file.url }}/">  {{file.titulo}} </a> 
+    
+        </td>
+       
+      
+  
+<!--detalhar-->
+      <td  class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" scope="col"> <a href="/file/{{ file.id }}">
+
+        <button type="button"  class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-white"
+          aria-label="Excluir"> Detalhar
+        <span class="btn-icon-right"> <i class="fa fa-close"></i> </span>
+        </button></a></td>
+<!---->
+      <!--EDITAR-->
+      {% if request.user.is_authenticated %}
+      {% if user == file.criado_por or perms.file.editar %}
+      <td class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" scope="col">
+        <a href="/file/editar/{{ file.id }}">        
+      <button type="button"  class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+      aria-label="Edit">
+                Editar <span class="btn-icon-right"> <i class="fa fa-edit"></i> </span>
+            </button>
+        </a></td>{% endif %}
+      <!---->{% endif %}
+
+
+   <!--EXCLUIR--> 
+  
+  {% if request.user.is_authenticated %}
+  {% if user == file.criado_por or perms.file.excluir %}
+  <td  class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" scope="col"> <a href="/file/excluir/{{ file.id }}">
+
+  <button type="button"  class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-white"
+    aria-label="Excluir"> Excluir
+         <span class="btn-icon-right"> <i class="fa fa-close"></i> </span>
+    </button></a>
+<!---->
+{% endif %}
+{% endif %}
+</td>
+</tr> 
+{% endfor %}
+    </tbody>
+</table></div>
+</div>
+</div>
+{% else %}
+{% endif %}
+
+{% endblock %}
+

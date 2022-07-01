@@ -1,0 +1,52 @@
+{% extends "_base.html" %} {% load bootstrap %} {% block content %}
+<h3 class="text-center">Documentos de Estágio</h3>
+<hr />
+
+
+
+{% if request.user.is_authenticated %}
+{% if user == estagio.criado_por or perms.estagio.est %}
+<a href="{% url 'estagio:postar' %}">
+  <button type="button" class="btn mb-2 btn-outline-primary btn-lg btn-block">
+    Postar <span class="btn-icon-right"><i class="fa fa-plus"></i></span>
+  </button>
+</a>{% endif %}{% endif %}
+<hr />
+{% if files %} {% for file in files %}
+<div class="card bg-light mb-3 text-right">
+  <div class="card-body">
+    <a class="text-decoration-none text-left" href="/estagio/{{ file.id }}/"><h5 class="card-title">{{ file.titulo }}</h5></a>
+    <a class="text-decoration-none text-justify" href="/estagio/{{ file.id }}/"><p class="card-text mb-3">{{ file.descricao }}</p></a>
+    <hr> 
+    @{{ file.criado_por.username }}
+    {% if request.user.is_authenticated %}
+    {% if user == file.criado_por or perms.file.ed %}
+    <a href="/estagio/editar/{{ file.id }}">
+      <button type="button" class="btn btn-outline-primary">
+        Editar<span class="btn-icon-right"> <i class="fa fa-edit"></i></span>
+      </button>
+    </a> {% endif %}
+    {% endif %}
+    
+    {% if request.user.is_authenticated %}
+    {% if user == file.criado_por or perms.file.est %}
+    <a href="/estagio/excluir/{{ file.id }}">
+      <button type="button" class="btn btn-outline-danger">
+        Excluir<span class="btn-icon-right"> <i class="fa fa-trash"></i></span>
+      </button>
+    </a>{% endif %}
+    {% endif %}
+    <a target="_blank" href="{{ file.file.url }}/">
+      <button type="button" class="btn btn-outline-success">
+        Abrir<span class="btn-icon-right"> <i class="fa fa-folder-open"></i></span>
+      </button>
+    </a>
+  </div>
+</div>
+<hr>
+{% endfor %} {% else %}
+<p>
+  Nenhum arquivo carregado ainda. Por favor clique
+  <a href="{% url 'estagio:postar' %}">aqui</a> para carregar arquivos.
+</p>
+{% endif %} {% endblock %}

@@ -1,0 +1,66 @@
+{% extends '_base.html' %}
+
+{% block TCCs %}
+
+<h4 class="mb-4 font-semibold">
+{{file.titulo}}
+</h4>
+
+
+<div class="grid gap-6 mb-8 md:grid-cols-6">
+  <div
+    class="min-w-0 p-4 bg-gray rounded-lg shadow-xs dark:bg-gray-800"
+  >
+  <table>
+    <thead>
+      <td  class="px-12 py-6">Descrição</td>
+    
+    </thead>
+    <tr>
+      <td>
+        {{file.texto}}
+      </td>
+      </tr>
+      <thead>
+        <td  class="px-4 py-3">equipe</td>
+        </thead>
+      <tr>
+      <td>
+        {{file.equipe}}
+      </td></tr>
+    </div>
+    
+<div class="grid gap-6 mb-8 md:grid-cols-1">
+      <thead>
+        <tr>
+          <td  class="px-4 py-3">turma</td>
+          <td  class="px-4 py-3">curso</td>
+          <td  class="px-4 py-3">orientador</td>
+        </tr>
+      </thead>
+      <td>
+        {{file.turma}}
+      </td>
+      <td>
+        {{file.curso}}
+      </td>
+      <td>
+        {{file.orientador}}
+      </td>
+    </tr>
+   <tr>
+    <td> <button
+      class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+    >
+    <a href="/file/download{{ file.file.url }}/"> {{file.titulo}}</a></td>
+    
+    </button>
+   </tr>
+  </table>
+
+</div>
+        
+   
+
+
+{% endblock %}

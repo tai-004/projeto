@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+{% load bootstrap %}
+{% block TCCs %}
+{% if heading %}
+
+{% endif %}
+<div class="container grid px-10 mx-auto ">
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+      <div class="card  auth-card">
+          <div class="card-body">
+<form action="" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  
+  {{form|bootstrap}}
+       
+ <button class="btn btn-info form-control " type="submit" value="submit">enviar</button>
+</form>   </div></div></div></div> </div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "_base.html" %} {% load bootstrap %} {% block content %}
+<br>
+<strong><h1 class="text-center py-4 text-gray-500 dark:text-gray-400">Documentos de Auxílio</h1><br></strong>
+<hr />
+{% if request.user.is_authenticated %}
+{% if user == auxilio.criado_por or perms.auxilio.aux %}
+
+<a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple" href="{% url 'auxilio:uploader' %}">
+<div class="flex items-center">
+  <svg
+    class="w-5 h-5 mr-2"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+  >
+    <path
+      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+    ></path>
+  </svg>
+  <span>Postar</span>
+</div>
+</a>
+{% endif %}
+{% endif %}
+<br>
+
+{% if files %} {% for file in files %}
+  <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+        <div class="w-full">
+        
+          <div class="grid gap-2 mb-2 md:grid-cols-3">
+
+  <div class="card mt-2">
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+  >
+    <div class="card-header"><strong>@{{ file.criado_por.username }}</strong></div><br>
+    <div class="card-body d-flex flex-row justify-content-between">
+      <div>
+              <a class="text-decoration-none text-left" href="/auxilio/{{ file.id }}/">
+                <h5 class="card-title"><strong class=" text-purple-600">{{ file.titulo }}</strong></h5><br>
+              </a><br><br>
+              <a class="text-decoration-none text-justify" href="/auxilio/{{ file.id }}/">
+                <p class="card-text mb-3">{{ file.descricao }}</p>
+              </a>
+            </div>
+            </h5>
+            <br>
+
+            {% if request.user.is_authenticated %}
+            {% if user == file.criado_por or perms.file.atual %}
+            <a href="/auxilio/editar/{{ file.id }}">
+              <button type="button"
+                class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                aria-label="Edit">
+                Editar<span class="btn-icon-right"> <i class="fa fa-edit"></i></span>
+              </button>
+            </a>
+            {% endif %}{% endif %}
+
+            {% if request.user.is_authenticated %}
+            {% if user == file.criado_por or perms.file.exc %}
+            <a href="/auxilio/excluir/{{ file.id }}">
+
+              <button type="button"
+                class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-white"
+                aria-label="Excluir">
+                Excluir<span class="btn-icon-right"> <i class="fa fa-trash"></i></span>
+              </button>
+            </a>{% endif %}{% endif %}
+            <a target="_blank" href="{{ file.file.url }}/">
+              <button type="button"
+              class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-white"
+              aria-label="Excluir">
+              Abrir<span class="btn-icon-right"> <i class="fa fa-folder-open"></i></span>
+            </button>
+            </a>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<hr> <br>
+{% endfor %} {% else %}
+<p>
+  Nenhum arquivo carregado ainda. Por favor clique
+  <a href="{% url 'auxilio:uploader' %}">aqui</a> para carregar arquivos.
+</p>
+{% endif %} {% endblock %}
+

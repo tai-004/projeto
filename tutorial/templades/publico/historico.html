@@ -1,0 +1,68 @@
+{% extends 'publico.html' %}
+{% block content %}
+{% load static %}
+<br><br><br><br><br><br><br>
+<main class="h-full overflow-y-auto">
+  <div class="container grid px-10 mx-auto">
+    
+    <div class="flex flex-col overflow-y-auto md:flex-row">
+      <div class="h-32 md:h-auto md:w-1/2">
+        <img
+          aria-hidden="true"
+          class="object-cover w-full h-full dark:hidden"
+          src="{% static '/img/mariealisson.jpeg' %}"
+          alt="Office"
+        />
+        <img
+          aria-hidden="true"
+          class="hidden object-cover w-full h-full dark:block"
+          src="{% static '/img/mariealisson.jpeg' %}"
+          alt="Office"
+        />
+      </div>
+      <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+        <div class="w-full">
+        
+          <div class="grid gap-2 mb-2 md:grid-cols-3">
+            <div class="min-w-0 p-4 text-white bg-purple-600 rounded-lg shadow-xs">
+              <h4 class="mb-6 font-semibold">
+                Colored card</h4>
+              <p  class="text-justify">
+                O instituto federal de educação, ciência e tecnologia baiano campus guanambi inicia sua trajetória de uma educação pública e de qualidade no ano de 1993. em 1995, a escola agrotécnica antônio josé teixeira oferecia apenas o curso técnico em agropecuária. com a aprovação da lei 11.892, as escolas agrotécnicas federais de catu, guanambi (supracitada antonio josé teixeira) , de santa inês e senhor do bomfim e algumas escolas médias de agropecuária regional foram fundidas para formar o instituto federal de educação, ciência e tecnologia baiano, onde a reitoria se localiza em salvador. é o único instituto em todo o território nacional que é focado em uma formação acadêmica nas áreas agrárias e ambientais. carrega o título de maior instituto em quantidade de campi de grande porte. inicialmente, a educação era focada apenas no ensino médio, porém com a expansão das redes federais de ensino, passou-se a oferecer também cursos de educação superior. o campus guanambi conta hoje com um grande número de discentes, é referência em educação técnica e preparo para o mercado de trabalho e conta com um ambiente favorável à iniciação científica. atualmente, conta com os seguintes cursos técnicos integrado ao ensino médio: informática, agropecuária e agroindústria. 
+
+              </p>
+            </div>
+          </div>
+        </div></div></div></div></main> 
+
+  <br><br><br> <div class="flex items-center justify-center p-2 sm:p-12 md:w-3">
+      <div class="grid gap-6 mb-8 md:grid-cols-2">
+        <div
+          class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+        >
+          <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
+            Revenue
+          </h4>
+          <p class="text-gray-600 dark:text-gray-400">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Fuga, cum commodi a omnis numquam quod? Totam exercitationem
+            quos hic ipsam at qui cum numquam, sed amet ratione! Ratione,
+            nihil dolorum.
+          </p>
+        </div>
+        <div
+          class="min-w-0 p-4 text-white bg-purple-600 rounded-lg shadow-xs"
+        >
+          <h4 class="mb-4 font-semibold">
+            Colored card
+          </h4>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Fuga, cum commodi a omnis numquam quod? Totam exercitationem
+            quos hic ipsam at qui cum numquam, sed amet ratione! Ratione,
+            nihil dolorum.
+          </p>
+        </div>
+      </div>
+    </div></div>
+{% endblock %}

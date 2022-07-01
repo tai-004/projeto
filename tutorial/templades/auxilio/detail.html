@@ -1,0 +1,28 @@
+{% extends '_base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="section-title">
+        <h3>Detalhes do arquivo de Auxílio</span></h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-dark">
+          <h4>Título:</h4><p>{{auxilio.titulo}}</p>
+          <h4>Descrição:</h4> <p class="text-justify">{{auxilio.descricao}}</p>
+          <h4>Arquivo:</h4>
+          <hr>
+          <a target="_blank" href="{{ auxilio.file.url }}/">
+            <button type="button" class="btn btn-outline-success">
+              Abrir<span class="btn-icon-right"> <i class="fa fa-folder-open"></i></span>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
